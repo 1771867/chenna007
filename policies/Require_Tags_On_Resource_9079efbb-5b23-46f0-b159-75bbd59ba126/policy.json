@@ -1,0 +1,52 @@
+{
+ "properties": {
+  "displayName": "Require Tags On Resource",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "metadata": {
+   "category": "Tags",
+   "createdBy": "06fc322e-10e8-415d-8072-d2c73f6df89b",
+   "createdOn": "2022-02-15T05:12:57.20375Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "tagName1": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Tag Name",
+     "description": "Name of the tag, such as 'Cost center'"
+    }
+   },
+   "tagName2": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Tag Name",
+     "description": "Name of the tag, such as 'Business Unit'"
+    }
+   }
+  },
+  "policyRule": {
+   "if": {
+    "not": {
+     "allOf": [
+      {
+       "field": "[concat('tags[', parameters('tagName1'), ']')]",
+       "exists": "true"
+      },
+      {
+       "field": "[concat('tags[', parameters('tagName2'), ']')]",
+       "exists": "true"
+      }
+     ]
+    }
+   },
+   "then": {
+    "effect": "deny"
+   }
+  }
+ },
+ "id": "/subscriptions/a75facd1-2fcd-43e2-bb6b-4d7f2c56cd76/providers/Microsoft.Authorization/policyDefinitions/9079efbb-5b23-46f0-b159-75bbd59ba126",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "9079efbb-5b23-46f0-b159-75bbd59ba126"
+}
